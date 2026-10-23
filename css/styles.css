@@ -1,0 +1,855 @@
+/* =========================================================
+   Ajara Lawal: personal site styles
+   ---------------------------------------------------------
+   1. Colours, fonts and spacing (change these to restyle)
+   2. Base styles
+   3. Buttons and small helpers
+   4. Header and navigation
+   5. Hero
+   6. Sections: about, experience, projects, skills
+   7. Contact and footer
+   8. Screen-size adjustments
+   9. Motion
+   ========================================================= */
+
+
+/* ---------- 1. Colours, fonts and spacing ---------- */
+:root {
+  /* The three main colours */
+  --ink: #1D2033;         /* blue-black */
+  --lilac: #C9B8E8;       /* lilac */
+  --nude: #EBDCCF;        /* nude */
+
+  /* Lighter and darker versions of them */
+  --ink-deep: #161827;
+  --ink-soft: #2C3049;
+  --lilac-soft: #F1ECF8;
+  --violet: #5B4A8B;      /* deep violet for links on white */
+  --nude-soft: #F7EFE8;
+
+  /* Neutrals */
+  --white: #FFFFFF;
+  --ash: #686B78;         /* secondary text */
+  --ash-light: #B4B6C2;   /* secondary text on dark backgrounds */
+  --line: #DDD9E4;
+
+  /* Fonts */
+  --font-display: "Young Serif", Georgia, serif;
+  --font-body: "Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  /* Type sizes: scale up gently on bigger screens */
+  --text-sm: 0.875rem;
+  --text-base: 1.0625rem;
+  --text-lg: 1.25rem;
+  --text-xl: clamp(1.375rem, 1.1rem + 0.8vw, 1.625rem);
+  --text-2xl: clamp(2rem, 1.4rem + 2.2vw, 3rem);
+  --text-hero: clamp(2.75rem, 1.4rem + 5.2vw, 5.75rem);
+
+  /* Spacing */
+  --gutter: clamp(1rem, 4vw, 2.5rem);
+  --section-space: clamp(4rem, 3rem + 5vw, 7.5rem);
+  --max-width: 72rem;
+  --header-height: 4.5rem;
+}
+
+
+/* ---------- 2. Base styles ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  /* Stops the sticky header from covering section titles when you jump to them */
+  scroll-padding-top: var(--header-height);
+}
+
+body {
+  margin: 0;
+  background: var(--white);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 {
+  margin: 0;
+  line-height: 1.15;
+}
+
+p {
+  margin: 0;
+}
+
+ul, ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: var(--violet);
+  text-underline-offset: 0.2em;
+  text-decoration-thickness: 1px;
+}
+
+a:hover {
+  text-decoration-thickness: 2px;
+}
+
+/* Clear keyboard focus ring everywhere */
+:focus-visible {
+  outline: 3px solid var(--violet);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+
+/* ---------- 3. Buttons and small helpers ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 3rem;
+  padding: 0.75rem 1.5rem;
+  border: 2px solid transparent;
+  border-radius: 999px;
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.btn--light {
+  background: var(--lilac);
+  color: var(--ink);
+}
+
+.btn--light:hover {
+  background: var(--white);
+}
+
+.btn--outline {
+  border-color: var(--lilac);
+  color: var(--white);
+}
+
+.btn--outline:hover {
+  background: var(--lilac);
+  color: var(--ink);
+}
+
+.btn--small {
+  min-height: 2.5rem;
+  padding: 0.4rem 1.1rem;
+  font-size: var(--text-sm);
+  background: transparent;
+  border-color: var(--ash-light);
+  color: var(--white);
+}
+
+.btn--small:hover {
+  border-color: var(--lilac);
+  color: var(--lilac);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -4rem;
+  z-index: 100;
+  padding: 0.6rem 1rem;
+  background: var(--lilac);
+  color: var(--ink);
+  font-weight: 600;
+  border-radius: 6px;
+}
+
+.skip-link:focus {
+  top: 1rem;
+}
+
+
+/* ---------- 4. Header and navigation ---------- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--ink);
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s ease;
+}
+
+/* JavaScript adds this class once you scroll down */
+.site-header.is-scrolled {
+  border-bottom-color: var(--ink-soft);
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: var(--header-height);
+}
+
+.nav__logo {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  color: var(--lilac);
+  text-decoration: none;
+}
+
+.nav__menu {
+  display: flex;
+  gap: 2rem;
+}
+
+.nav__menu a {
+  position: relative;
+  color: var(--ash-light);
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.nav__menu a:hover,
+.nav__menu a.is-current {
+  color: var(--white);
+}
+
+/* Lilac underline under the section you're currently reading */
+.nav__menu a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -0.35rem;
+  height: 2px;
+  background: var(--lilac);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.25s ease;
+}
+
+.nav__menu a.is-current::after {
+  transform: scaleX(1);
+}
+
+/* Hamburger button: only shown on small screens */
+.nav__toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0 0.6rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.nav__toggle-bar {
+  display: block;
+  height: 2px;
+  background: var(--white);
+  transition: transform 0.25s ease;
+}
+
+.nav__toggle[aria-expanded="true"] .nav__toggle-bar:first-child {
+  transform: translateY(4px) rotate(45deg);
+}
+
+.nav__toggle[aria-expanded="true"] .nav__toggle-bar:nth-child(2) {
+  transform: translateY(-4px) rotate(-45deg);
+}
+
+/* Focus ring in lilac on dark backgrounds */
+.site-header :focus-visible,
+.hero :focus-visible,
+.contact :focus-visible,
+.footer :focus-visible {
+  outline-color: var(--lilac);
+}
+
+
+/* ---------- 5. Hero ---------- */
+.hero {
+  background: var(--ink);
+  color: var(--white);
+  padding: clamp(2.5rem, 2rem + 4vw, 5.5rem) 0 clamp(3.5rem, 3rem + 4vw, 6.5rem);
+  overflow: hidden;
+}
+
+.hero__inner {
+  display: grid;
+  grid-template-columns: 1.35fr 1fr;
+  align-items: center;
+  gap: clamp(2.5rem, 5vw, 5rem);
+}
+
+.hero__name {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--text-hero);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  max-width: 10ch;
+}
+
+.hero__role {
+  margin-top: 1.5rem;
+  font-size: var(--text-xl);
+  font-weight: 600;
+  color: var(--lilac);
+}
+
+.hero__intro {
+  margin-top: 1rem;
+  max-width: 34rem;
+  color: var(--ash-light);
+  font-size: var(--text-lg);
+  line-height: 1.6;
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 2rem;
+}
+
+.hero__where {
+  margin-top: 1.75rem;
+  font-size: var(--text-sm);
+  color: var(--ash-light);
+}
+
+/* The arched portrait frame */
+.hero__portrait {
+  display: flex;
+  justify-content: center;
+}
+
+.arch {
+  position: relative;
+  width: min(100%, 24rem);
+  aspect-ratio: 4 / 5;
+  border-radius: 999px 999px 0 0;
+  background: var(--lilac);
+  /* A nude arch peeking out behind the lilac one */
+  box-shadow: 1.25rem 1.25rem 0 0 var(--nude);
+  isolation: isolate;
+}
+
+.arch__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: inherit;
+  z-index: 1;
+  /* Hides the alt text if the photo hasn't been added yet */
+  color: transparent;
+}
+
+/* Your initials, shown when there is no photo */
+.arch__monogram {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-family: var(--font-display);
+  font-size: clamp(5rem, 4rem + 5vw, 8rem);
+  color: var(--ink);
+}
+
+.arch.no-photo .arch__img {
+  display: none;
+}
+
+
+/* ---------- 6. Sections ---------- */
+.section {
+  padding: var(--section-space) 0;
+}
+
+.section--tint {
+  background: var(--lilac-soft);
+}
+
+.section--nude {
+  background: var(--nude);
+}
+
+.section__title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--text-2xl);
+  letter-spacing: -0.01em;
+}
+
+/* About */
+.about {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 2.5rem;
+}
+
+.about__body {
+  max-width: 40rem;
+}
+
+.about__body p + p {
+  margin-top: 1.25rem;
+}
+
+.about__body p:first-child {
+  font-size: var(--text-lg);
+}
+
+.facts {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem 2rem;
+  margin: 2.5rem 0 0;
+  padding-top: 2rem;
+  border-top: 1px solid var(--line);
+}
+
+.facts dt {
+  font-size: var(--text-sm);
+  color: var(--ash);
+}
+
+.facts dd {
+  margin: 0.2rem 0 0;
+  font-weight: 600;
+}
+
+/* Experience */
+.resume {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(2.5rem, 5vw, 5rem);
+  margin-top: 3rem;
+}
+
+.resume__heading {
+  font-size: var(--text-lg);
+  font-weight: 700;
+  margin-bottom: 1.75rem;
+}
+
+.timeline {
+  border-left: 2px solid var(--lilac);
+  padding-left: 1.75rem;
+}
+
+.timeline__item {
+  position: relative;
+}
+
+.timeline__item + .timeline__item {
+  margin-top: 2.25rem;
+}
+
+/* The dot on the line */
+.timeline__item::before {
+  content: "";
+  position: absolute;
+  left: calc(-1.75rem - 7px);
+  top: 0.45rem;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--ink);
+  border: 2px solid var(--lilac-soft);
+}
+
+.timeline__date {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--violet);
+}
+
+.timeline__title {
+  margin-top: 0.3rem;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--text-xl);
+}
+
+.timeline__org {
+  margin-top: 0.2rem;
+  color: var(--ash);
+}
+
+.timeline__desc {
+  margin-top: 0.6rem;
+  max-width: 34rem;
+}
+
+/* Projects */
+.projects__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.filter {
+  min-height: 2.5rem;
+  padding: 0.4rem 1rem;
+  border: 1.5px solid var(--ink);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.filter:hover {
+  background: var(--lilac-soft);
+}
+
+.filter.is-active {
+  background: var(--ink);
+  color: var(--white);
+}
+
+.projects__count {
+  margin-top: 1.25rem;
+  font-size: var(--text-sm);
+  color: var(--ash);
+}
+
+.projects {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 3rem clamp(2rem, 5vw, 4.5rem);
+  margin-top: 2rem;
+}
+
+.project {
+  padding-top: 1.5rem;
+  border-top: 2px solid var(--ink);
+}
+
+.project[hidden] {
+  display: none;
+}
+
+.project__title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--text-xl);
+}
+
+.project__desc {
+  margin-top: 0.75rem;
+  max-width: 36rem;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 1.1rem;
+}
+
+.tags li {
+  padding: 0.2rem 0.75rem;
+  border-radius: 999px;
+  background: var(--lilac-soft);
+  color: var(--violet);
+  font-size: var(--text-sm);
+  font-weight: 600;
+}
+
+.project__link {
+  display: inline-block;
+  margin-top: 1.1rem;
+  font-weight: 600;
+}
+
+/* Skills */
+.skills {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2.5rem;
+  margin-top: 3rem;
+}
+
+.skills__group h3 {
+  font-size: var(--text-lg);
+  font-weight: 700;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid var(--ink);
+}
+
+.skills__group li {
+  padding: 0.6rem 0;
+  border-bottom: 1px solid rgba(29, 32, 51, 0.15);
+}
+
+
+/* ---------- 7. Contact and footer ---------- */
+.contact {
+  background: var(--ink);
+  color: var(--white);
+  padding: var(--section-space) 0;
+}
+
+.contact__title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--text-hero);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  max-width: 14ch;
+}
+
+.contact__lead {
+  margin-top: 1.5rem;
+  max-width: 34rem;
+  color: var(--ash-light);
+  font-size: var(--text-lg);
+}
+
+.contact__email {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem 1.25rem;
+  margin-top: 2.5rem;
+}
+
+.contact__address {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  color: var(--lilac);
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+
+.contact__address:hover {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+}
+
+.contact__copied {
+  font-size: var(--text-sm);
+  color: var(--nude);
+}
+
+.socials {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 2rem;
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--ink-soft);
+}
+
+.socials a {
+  color: var(--white);
+  font-weight: 600;
+}
+
+.socials a:hover {
+  color: var(--lilac);
+}
+
+.footer {
+  background: var(--ink-deep);
+  color: var(--ash-light);
+  font-size: var(--text-sm);
+}
+
+.footer__inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+
+.footer a {
+  color: var(--ash-light);
+}
+
+.footer a:hover {
+  color: var(--white);
+}
+
+
+/* ---------- 8. Screen-size adjustments ---------- */
+
+/* Tablets */
+@media (max-width: 960px) {
+  .skills {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .about {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+/* Phones and small tablets */
+@media (max-width: 760px) {
+  .nav__toggle {
+    display: flex;
+  }
+
+  /* Menu slides down under the header */
+  .nav__menu {
+    position: absolute;
+    top: var(--header-height);
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    gap: 0;
+    padding: 0.5rem var(--gutter) 1.5rem;
+    background: var(--ink);
+    border-bottom: 1px solid var(--ink-soft);
+    display: none;
+  }
+
+  .nav__menu.is-open {
+    display: flex;
+  }
+
+  .nav__menu a {
+    display: block;
+    padding: 0.85rem 0;
+    font-size: var(--text-lg);
+  }
+
+  .nav__menu a::after {
+    display: none;
+  }
+
+  .hero__inner {
+    grid-template-columns: 1fr;
+  }
+
+  /* Photo first on phones, then the name */
+  .hero__portrait {
+    order: -1;
+    justify-content: flex-start;
+  }
+
+  .arch {
+    width: min(70%, 16rem);
+    box-shadow: 0.9rem 0.9rem 0 0 var(--nude);
+  }
+
+  .resume,
+  .projects {
+    grid-template-columns: 1fr;
+  }
+
+  .facts {
+    grid-template-columns: 1fr;
+  }
+
+  .footer__inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 520px) {
+  .skills {
+    grid-template-columns: 1fr;
+  }
+
+  .hero__actions .btn {
+    flex: 1 1 100%;
+  }
+}
+
+
+/* ---------- 9. Motion ---------- */
+
+/* One entrance when the page loads: the arch rises, then the name appears */
+/* The negative values leave room for the nude arch behind it */
+@keyframes arch-rise {
+  from { clip-path: inset(100% -2rem -2rem -2rem); }
+  to   { clip-path: inset(-2rem -2rem -2rem -2rem); }
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: none; }
+}
+
+.arch {
+  animation: arch-rise 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.hero__text > * {
+  animation: fade-up 0.7s ease both;
+}
+
+.hero__name    { animation-delay: 0.25s; }
+.hero__role    { animation-delay: 0.4s; }
+.hero__intro   { animation-delay: 0.5s; }
+.hero__actions { animation-delay: 0.6s; }
+.hero__where   { animation-delay: 0.7s; }
+
+/* Respect people who ask their device to reduce motion */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
