@@ -67,6 +67,9 @@ html {
 }
 
 body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
   margin: 0;
   background: var(--white);
   color: var(--ink);
@@ -289,6 +292,33 @@ a:hover {
 
 .nav__toggle[aria-expanded="true"] .nav__toggle-bar:nth-child(2) {
   transform: translateY(-4px) rotate(-45deg);
+}
+
+/* One page at a time: only the section picked in the menu is shown.
+   It stretches to fill the screen so the footer stays at the bottom. */
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.js main > section:not(.is-current) {
+  display: none;
+}
+
+.js main > section.is-current {
+  flex: 1;
+  animation: fade-up 0.45s ease both;
+}
+
+.js .hero.is-current {
+  display: flex;
+  align-items: center;
+}
+
+/* The page gets focus when it opens (for screen readers); no ring needed */
+main > section:focus {
+  outline: none;
 }
 
 /* Focus ring in lilac on dark backgrounds */
@@ -639,55 +669,125 @@ a:hover {
   padding: var(--section-space) 0;
 }
 
+.contact__inner {
+  text-align: center;
+}
+
+/* Small lilac square before the title */
 .contact__title {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
   font-family: var(--font-display);
   font-weight: 400;
-  font-size: var(--text-hero);
-  line-height: 1.05;
-  letter-spacing: -0.02em;
-  max-width: 14ch;
+  font-size: var(--text-2xl);
+  letter-spacing: -0.01em;
+}
+
+.contact__title::before {
+  content: "";
+  width: 0.65em;
+  height: 0.65em;
+  background: var(--lilac);
 }
 
 .contact__lead {
-  margin-top: 1.5rem;
+  margin: 1rem auto 0;
   max-width: 34rem;
   color: var(--ash-light);
-  font-size: var(--text-lg);
 }
 
-.contact__email {
+/* White card holding the form */
+.contact__form {
+  display: grid;
+  gap: 2rem;
+  max-width: 53rem;
+  margin: 3rem auto 0;
+  padding: clamp(2rem, 1rem + 4vw, 4.75rem);
+  background: var(--white);
+  color: var(--ink);
+  text-align: left;
+}
+
+/* The card is white, so focus rings go back to violet inside it */
+.contact__form :focus-visible {
+  outline-color: var(--violet);
+}
+
+.field label {
+  display: block;
+  font-size: var(--text-sm);
+  font-weight: 700;
+}
+
+/* Inputs are just a line to write on */
+.field input,
+.field textarea {
+  display: block;
+  width: 100%;
+  margin-top: 0.75rem;
+  padding: 0.4rem 0;
+  border: 0;
+  border-bottom: 1px solid var(--ink);
+  border-radius: 0;
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+}
+
+.field textarea {
+  resize: vertical;
+  min-height: 7rem;
+}
+
+.field input:focus-visible,
+.field textarea:focus-visible {
+  outline: none;
+  border-bottom: 2px solid var(--violet);
+}
+
+.contact__actions {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 1rem 1.25rem;
-  margin-top: 2.5rem;
+  gap: 1rem 1.5rem;
 }
 
-.contact__address {
-  font-family: var(--font-display);
-  font-size: var(--text-2xl);
-  color: var(--lilac);
-  text-decoration: none;
-  overflow-wrap: anywhere;
+.btn--send {
+  min-width: 8.75rem;
+  background: var(--violet);
+  color: var(--white);
 }
 
-.contact__address:hover {
-  text-decoration: underline;
-  text-decoration-thickness: 2px;
+.btn--send:hover {
+  background: var(--ink);
 }
 
-.contact__copied {
+.btn--send:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+.contact__status {
   font-size: var(--text-sm);
-  color: var(--nude);
+  font-weight: 600;
+}
+
+.contact__direct {
+  margin-top: 2.5rem;
+  color: var(--ash-light);
+}
+
+.contact__direct a {
+  color: var(--lilac);
 }
 
 .socials {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 0.75rem 2rem;
-  margin-top: 3rem;
-  padding-top: 2rem;
-  border-top: 1px solid var(--ink-soft);
+  margin-top: 1.25rem;
 }
 
 .socials a {

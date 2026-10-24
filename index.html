@@ -20,6 +20,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Young+Serif&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="css/styles.css">
+  <!-- Lets the CSS show one page at a time. Without JavaScript the site is one long scroll. -->
+  <script>document.documentElement.classList.add("js");</script>
   <script src="js/main.js" defer></script>
 </head>
 
@@ -29,7 +31,7 @@
   <!-- ========== HEADER / NAVIGATION ========== -->
   <header class="site-header" id="top">
     <nav class="nav container" aria-label="Main">
-      <a class="nav__logo" href="#top" aria-label="Ajara Lawal, back to top">AL</a>
+      <a class="nav__logo" href="#home" aria-label="Ajara Lawal, home">AL</a>
 
       <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="nav-menu">
         <span class="nav__toggle-bar"></span>
@@ -38,6 +40,7 @@
       </button>
 
       <ul class="nav__menu" id="nav-menu">
+        <li><a href="#home">Home</a></li>
         <li><a href="#about">About</a></li>
         <li><a href="#experience">Experience</a></li>
         <li><a href="#projects">Projects</a></li>
@@ -50,7 +53,8 @@
   <main id="main">
 
     <!-- ========== HERO ========== -->
-    <section class="hero">
+    <!-- Each section with an id is one "page"; the menu links switch between them -->
+    <section class="hero" id="home">
       <div class="container hero__inner">
         <div class="hero__text">
           <h1 class="hero__name">Ajara Oyinloye Lawal</h1>
@@ -87,7 +91,7 @@
         <div class="about__body">
           <p>
             I'm a data scientist from Ghana, currently in Kigali completing a master's in
-            AI and Data Science at CMU Africa. Most of my work sits in computer vision:
+            AI and Data Science at Carnegie Mellon University. Most of my work sits in computer vision:
             spotting people in search-and-rescue imagery, recognising faces, and comparing
             detection and segmentation models to see which ones actually earn their keep.
           </p>
@@ -98,26 +102,18 @@
             about who is responsible when AI-written code goes wrong.
           </p>
           <p>
-            Outside the lab I look after the money for the CMU-Africa Data Science Club and
+            Outside the lab I look after the money for the Carnegie Mellon University Data Science Club and
             represent Ghanaian students on campus.
           </p>
 
           <dl class="facts">
             <div class="facts__item">
               <dt>Studying</dt>
-              <dd>MS in AI and Data Science, CMU Africa</dd>
-            </div>
-            <div class="facts__item">
-              <dt>Finishing</dt>
-              <dd>December 2026</dd>
+              <dd>MS in AI and Data Science, Carnegie Mellon University</dd>
             </div>
             <div class="facts__item">
               <dt>Focus</dt>
-              <dd>Computer vision, robustness, responsible AI</dd>
-            </div>
-            <div class="facts__item">
-              <dt>Looking for</dt>
-              <dd>Remote data science, AI engineering and computer vision roles</dd>
+              <dd>Computer vision, multi-agent LLM systems, data pipelines, model robustness and evaluation, responsible AI for low-resource settings</dd>
             </div>
           </dl>
         </div>
@@ -130,39 +126,59 @@
         <h2 class="section__title">Experience</h2>
 
         <div class="resume">
-          <!-- Work and leadership -->
+          <!-- Work -->
           <div class="resume__col">
-            <h3 class="resume__heading">Work and leadership</h3>
+            <h3 class="resume__heading">Work</h3>
             <ol class="timeline">
               <li class="timeline__item">
                 <p class="timeline__date">Summer 2026</p>
                 <h4 class="timeline__title">Summer Intern, RISE Programme</h4>
                 <p class="timeline__org">Carnegie Mellon University Africa</p>
-                <!-- Add one or two lines on what you worked on during RISE -->
-              </li>
-              <li class="timeline__item">
-                <p class="timeline__date">Dec 2025 to Dec 2026</p>
-                <h4 class="timeline__title">Treasurer</h4>
-                <p class="timeline__org">CMU-Africa Data Science Club</p>
                 <p class="timeline__desc">
-                  I plan event budgets, find sponsors and outside support, co-organise
-                  events and keep track of the club's activities.
+                  I wrote, organised and updated interactive course content on OLI Torus, linked
+                  to Rwanda's Moodle-based REB learning platform, for students working toward the
+                  Advanced General Certificate of Secondary Education.
                 </p>
               </li>
               <li class="timeline__item">
-                <p class="timeline__date">Dec 2025 to Dec 2026</p>
-                <h4 class="timeline__title">Country Representative, Ghana</h4>
-                <p class="timeline__org">CMU Africa</p>
+                <p class="timeline__date">Sep 2025 to May 2026</p>
+                <h4 class="timeline__title">Student Affairs Support</h4>
+                <p class="timeline__org">Carnegie Mellon University Africa</p>
                 <p class="timeline__desc">
-                  I represent Ghanaian students, welcome new arrivals, organise hangouts and
-                  help other representatives run country, multicultural and diversity days.
+                  I handled student communications, calendars and day-to-day administration for
+                  more than 100 graduate students, and coordinated campus event logistics, from
+                  sourcing vendors to keeping budget and expenditure records.
+                </p>
+              </li>
+              <li class="timeline__item">
+                <p class="timeline__date">Nov 2023 to Dec 2024</p>
+                <h4 class="timeline__title">Junior Software Developer (National Service)</h4>
+                <p class="timeline__org">Ghana-India Kofi Annan Centre of Excellence in ICT (GI-KACE)</p>
+                <p class="timeline__desc">
+                  I co-developed SmartConference, a FastAPI and PostgreSQL app for conference
+                  registration and attendance, and a Staff Appraisal ERP that moved appraisals off
+                  paper. I also tested backend APIs and co-facilitated classes in Python and data
+                  analytics.
                 </p>
               </li>
               <li class="timeline__item">
                 <p class="timeline__date">Nov 2021 to Mar 2025</p>
                 <h4 class="timeline__title">Operations Manager (Intern)</h4>
                 <p class="timeline__org">Namibra</p>
-                <!-- Add one or two lines on what you did at Namibra -->
+                <p class="timeline__desc">
+                  I brought in ClickUp to run the team's work in Scrum sprints, researched and
+                  chose new tools for the business, trained the team on them and managed
+                  day-to-day operations.
+                </p>
+              </li>
+              <li class="timeline__item">
+                <p class="timeline__date">Oct 2021 to Dec 2021</p>
+                <h4 class="timeline__title">Industrial Attachment Intern</h4>
+                <p class="timeline__org">CKT-University of Technology and Applied Sciences</p>
+                <p class="timeline__desc">
+                  I replaced and organised network cabling, switches and ports for the
+                  institution, and helped build its booking system.
+                </p>
               </li>
             </ol>
           </div>
@@ -180,7 +196,14 @@
                   machine learning.
                 </p>
               </li>
-              <!-- Copy the <li> above to add your undergraduate degree here -->
+              <li class="timeline__item">
+                <p class="timeline__date">Sep 2019 to Sep 2023</p>
+                <h4 class="timeline__title">BSc Computer Science (Honours)</h4>
+                <p class="timeline__org">University for Development Studies, Navrongo, Ghana</p>
+                <p class="timeline__desc">
+                  Mastercard Foundation Scholar through CAMFED.
+                </p>
+              </li>
               <li class="timeline__item">
                 <p class="timeline__date">Certificate</p>
                 <h4 class="timeline__title">Virtual Assistant Programme</h4>
@@ -351,17 +374,46 @@
     <!-- ========== CONTACT ========== -->
     <section class="contact" id="contact">
       <div class="container contact__inner">
-        <h2 class="contact__title">Let's work together</h2>
+        <h2 class="contact__title">Let's talk</h2>
         <p class="contact__lead">
           I'm open to remote roles in data science, AI engineering and computer vision.
-          Email is the quickest way to reach me.
         </p>
 
-        <div class="contact__email">
-          <a class="contact__address" href="mailto:aolawal@andrew.cmu.edu">aolawal@andrew.cmu.edu</a>
-          <button class="btn btn--small" type="button" data-copy="aolawal@andrew.cmu.edu">Copy email</button>
-          <span class="contact__copied" role="status" aria-live="polite"></span>
-        </div>
+        <!-- Messages are forwarded to lawalajara1@gmail.com by FormSubmit (formsubmit.co).
+             The very first message sends an activation email to that inbox: click the link in it once. -->
+        <form class="contact__form" action="https://formsubmit.co/lawalajara1@gmail.com" method="POST">
+          <input type="hidden" name="_subject" value="New message from your website">
+          <input type="hidden" name="_template" value="table">
+          <!-- Hidden trap field: real people never fill it, spam bots do -->
+          <input type="text" name="_honey" class="visually-hidden" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+          <div class="field">
+            <label for="name">Full Name *</label>
+            <input id="name" name="name" type="text" autocomplete="name" required>
+          </div>
+          <div class="field">
+            <label for="email">Email *</label>
+            <input id="email" name="email" type="email" autocomplete="email" required>
+          </div>
+          <div class="field">
+            <label for="subject">Subject</label>
+            <input id="subject" name="subject" type="text">
+          </div>
+          <div class="field">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="4"></textarea>
+          </div>
+
+          <div class="contact__actions">
+            <button class="btn btn--send" type="submit">Send</button>
+            <p class="contact__status" role="status" aria-live="polite"></p>
+          </div>
+        </form>
+
+        <p class="contact__direct">
+          Prefer email? Write to me at
+          <a href="mailto:lawalajara1@gmail.com">lawalajara1@gmail.com</a>
+        </p>
 
         <ul class="socials">
           <li><a href="https://www.linkedin.com/in/ajaralawal" target="_blank" rel="noopener">LinkedIn</a></li>

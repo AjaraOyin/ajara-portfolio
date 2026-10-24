@@ -41,25 +41,55 @@ window.addEventListener("scroll", () => {
 }, { passive: true });
 
 
-// ---------- 3. Underline the section you're reading ----------
+// ---------- 3. One page at a time ----------
+// Each section with an id is a page. The address bar shows which one
+// (#about, #projects...), so the back button and shared links work.
 const navLinks = document.querySelectorAll(".nav__menu a");
-const sections = document.querySelectorAll("main section[id]");
+const pages = document.querySelectorAll("main > section[id]");
+const siteTitle = document.title;
 
-const watcher = new IntersectionObserver((entries) => {
-  entries.forEach((entry) => {
-    if (!entry.isIntersecting) return;
+function showPage(id, moveFocus) {
+  const page = document.getElementById(id);
 
-    navLinks.forEach((link) => {
-      const matches = link.getAttribute("href") === "#" + entry.target.id;
-      link.classList.toggle("is-current", matches);
-    });
+  pages.forEach((p) => p.classList.toggle("is-current", p === page));
+
+  navLinks.forEach((link) => {
+    const matches = link.getAttribute("href") === "#" + id;
+    link.classList.toggle("is-current", matches);
+    if (matches) link.setAttribute("aria-current", "page");
+    else link.removeAttribute("aria-current");
   });
-}, {
-  // A section counts as "current" when it crosses the middle of the screen
-  rootMargin: "-45% 0px -50% 0px"
+
+  // e.g. "Projects | Ajara Lawal"; the home page keeps the full title
+  const heading = page.querySelector("h2");
+  document.title = heading ? `${heading.textContent} | Ajara Lawal` : siteTitle;
+
+  // Start each page at the top, and tell screen readers the page changed
+  window.scrollTo({ top: 0, behavior: "instant" });
+  if (moveFocus) {
+    page.setAttribute("tabindex", "-1");
+    page.focus({ preventScroll: true });
+  }
+}
+
+function pageFromAddress() {
+  const id = location.hash.slice(1);
+  // Links like #top or #main aren't pages, so they don't switch page
+  return [...pages].some((p) => p.id === id) ? id : null;
+}
+
+window.addEventListener("hashchange", () => {
+  const id = pageFromAddress();
+  if (id) showPage(id, true);
 });
 
-sections.forEach((section) => watcher.observe(section));
+showPage(pageFromAddress() || "home", false);
+
+// When a link like yoursite/#projects is opened, the browser jumps to that
+// section after loading. Undo the jump so the page starts at the top.
+window.addEventListener("load", () => {
+  window.scrollTo({ top: 0, behavior: "instant" });
+});
 
 
 // ---------- 4. Project filters ----------
@@ -97,22 +127,35 @@ filters.forEach((button) => {
 showProjects("all");
 
 
-// ---------- 5. Copy email button ----------
-const copyButton = document.querySelector("[data-copy]");
-const copiedNote = document.querySelector(".contact__copied");
+// ---------- 5. Contact form ----------
+// Sends the message in the background so visitors stay on the page.
+// Without JavaScript the form still posts to FormSubmit the normal way.
+const form = document.querySelector(".contact__form");
+const sendButton = form.querySelector('button[type="submit"]');
+const formStatus = form.querySelector(".contact__status");
 
-copyButton.addEventListener("click", async () => {
-  const email = copyButton.dataset.copy;
+form.addEventListener("submit", async (event) => {
+  event.preventDefault();
+  sendButton.disabled = true;
+  sendButton.textContent = "Sending...";
+  formStatus.textContent = "";
 
   try {
-    await navigator.clipboard.writeText(email);
-    copiedNote.textContent = "Email copied";
+    const response = await fetch(form.action.replace("formsubmit.co/", "formsubmit.co/ajax/"), {
+      method: "POST",
+      headers: { Accept: "application/json" },
+      body: new FormData(form)
+    });
+    if (!response.ok) throw new Error(response.statusText);
+
+    form.reset();
+    formStatus.textContent = "Thanks! Your message is on its way.";
   } catch {
-    // Some browsers block the clipboard; fall back to showing the address
-    copiedNote.textContent = "Couldn't copy. Select the address above instead.";
+    formStatus.textContent = "Sorry, that didn't send. Please email me at lawalajara1@gmail.com.";
   }
 
-  setTimeout(() => { copiedNote.textContent = ""; }, 3000);
+  sendButton.disabled = false;
+  sendButton.textContent = "Send";
 });
 
 
