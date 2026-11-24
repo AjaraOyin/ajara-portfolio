@@ -382,12 +382,6 @@ main > section:focus {
   margin-top: 2rem;
 }
 
-.hero__where {
-  margin-top: 1.75rem;
-  font-size: var(--text-sm);
-  color: var(--ash-light);
-}
-
 /* The arched portrait frame */
 .hero__portrait {
   display: flex;
@@ -709,12 +703,6 @@ main > section:focus {
   background: var(--lilac);
 }
 
-.contact__lead {
-  margin: 1rem auto 0;
-  max-width: 34rem;
-  color: var(--ash-light);
-}
-
 /* White card holding the form */
 .contact__form {
   display: grid;
@@ -956,7 +944,6 @@ main > section:focus {
 .hero__role    { animation-delay: 0.4s; }
 .hero__intro   { animation-delay: 0.5s; }
 .hero__actions { animation-delay: 0.6s; }
-.hero__where   { animation-delay: 0.7s; }
 
 /* Respect people who ask their device to reduce motion */
 @media (prefers-reduced-motion: reduce) {
