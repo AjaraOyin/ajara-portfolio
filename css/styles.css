@@ -369,6 +369,12 @@ main > section:focus {
   line-height: 1.6;
 }
 
+/* The first line is the summary; the rest sits a size smaller */
+.hero__intro p + p {
+  margin-top: 0.85rem;
+  font-size: var(--text-base);
+}
+
 .hero__actions {
   display: flex;
   flex-wrap: wrap;
@@ -464,6 +470,18 @@ main > section:focus {
 
 .about__body p:first-child {
   font-size: var(--text-lg);
+}
+
+/* Subheadings between the topics */
+.about__body h3 {
+  margin-top: 2.5rem;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--text-xl);
+}
+
+.about__body h3 + p {
+  margin-top: 0.75rem;
 }
 
 .facts {

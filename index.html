@@ -4,11 +4,11 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Ajara Lawal | Data Scientist</title>
-  <meta name="description" content="Ajara Oyinloye Lawal is a data scientist finishing an MS in AI and Data Science at Carnegie Mellon University Africa, working on computer vision, model robustness and responsible AI.">
+  <meta name="description" content="Ajara Oyinloye Lawal is a data scientist who builds and evaluates AI models and applications, with a focus on medical imaging, multimodal learning and AI agents.">
 
   <!-- How the link looks when shared on LinkedIn, WhatsApp, etc. -->
   <meta property="og:title" content="Ajara Lawal | Data Scientist">
-  <meta property="og:description" content="Data scientist working on computer vision, model robustness and responsible AI.">
+  <meta property="og:description" content="Data scientist working on healthcare AI, medical imaging and agentic systems.">
   <meta property="og:type" content="website">
   <meta name="theme-color" content="#1D2033">
 
@@ -58,12 +58,22 @@
       <div class="container hero__inner">
         <div class="hero__text">
           <h1 class="hero__name">Ajara Oyinloye Lawal</h1>
-          <p class="hero__role">Data scientist</p>
-          <p class="hero__intro">
-            I build computer vision and machine learning systems, and I care about
-            whether they hold up when the data gets messy. Finishing my MS in AI and
-            Data Science at Carnegie Mellon University Africa.
-          </p>
+          <p class="hero__role">Data Scientist | Healthcare AI &amp; Agentic Systems</p>
+          <div class="hero__intro">
+            <p>
+              I build and evaluate AI models and applications, with a focus on medical
+              imaging, multimodal learning and AI agents.
+            </p>
+            <p>
+              My current work spans cardiovascular AI research, robustness testing for Mpox
+              skin-lesion classifiers, and an agentic business intelligence system that turns
+              financial questions into evidence-backed answers.
+            </p>
+            <p>
+              Across these projects, I focus on how models behave, how their outputs are
+              verified, and how people can understand and correct the systems they use.
+            </p>
+          </div>
           <div class="hero__actions">
             <!-- Put your CV in the assets folder with this exact name -->
             <a class="btn btn--light" href="assets/Ajara-Lawal-CV.pdf" download>Download my CV</a>
@@ -90,30 +100,82 @@
 
         <div class="about__body">
           <p>
-            I'm a data scientist from Ghana, currently in Kigali completing a master's in
-            AI and Data Science at Carnegie Mellon University. Most of my work sits in computer vision:
-            spotting people in search-and-rescue imagery, recognising faces, and comparing
-            detection and segmentation models to see which ones actually earn their keep.
+            I'm Ajara Oyinloye Lawal, a data scientist with a background in software
+            development. I work on healthcare AI, medical imaging and computer vision, and
+            I'm most interested in how reliable machine learning models really are: how they
+            behave under difficult conditions, where they fail, and how careful evaluation
+            can bring those limits to light.
+          </p>
+
+          <h3>Medical imaging and model robustness</h3>
+          <p>
+            In a team research project for Carnegie Mellon University's Introduction to Deep
+            Learning course, we're testing how robust skin-lesion classifiers for Mpox are.
+            My part has been reproducing a published DenseNet121 baseline and training model
+            variants to compare against it, including adversarially trained ones. We're
+            looking at how adversarial perturbations affect classification, and at the
+            trade-off between accuracy on clean images and resistance to attack. The work is
+            shaping how I think about rigorous evaluation in medical image analysis.
+          </p>
+
+          <h3>Cardiovascular AI research</h3>
+          <p>
+            I volunteer with Carnegie Mellon University Africa's AI Healthcare Research
+            Laboratory on CardioSync, a research initiative developing a multimodal
+            foundation model that brings together electrocardiograms (ECG), heart sounds
+            (PCG) and cardiac magnetic resonance imaging (CMR). It asks whether knowledge
+            learned from cardiac imaging can improve screening with heart signals that are
+            easier to record, with ECG linking the imaging and acoustic data. The wider aim is
+            cardiovascular screening that works in resource-limited settings.
           </p>
           <p>
-            Lately I've been spending more time on what happens when models meet the real
-            world. That means testing medical models against adversarial attacks, building
-            tools that let non-technical people ask questions of their data, and writing
-            about who is responsible when AI-written code goes wrong.
+            I work on the cardiac MRI and ECG–imaging data. That means preparing MRI
+            datasets, selecting and standardising cardiac image sequences, assigning cardiac
+            phases, building task labels, and organising the indices that pair ECGs with CMR
+            scans for training and evaluation. The research plan also includes evaluating
+            CineMA as an external baseline.
+          </p>
+
+          <h3>AI agents for business data</h3>
+          <p>
+            I'm helping build a natural-language business intelligence system that lets
+            business users explore financial data by asking questions in plain English. It
+            runs over Apache Fineract's 261-table PostgreSQL database and coordinates
+            planning, SQL generation, read-only execution and explanation. Every answer comes
+            with its evidence: the SQL, the tables and columns used, the business definitions
+            and any assumptions.
           </p>
           <p>
-            Outside the lab I look after the money for the Carnegie Mellon University Data Science Club and
-            represent Ghanaian students on campus.
+            I own the planner, the explanation layer and the user interface, including the
+            workflow for capturing analyst corrections. To write answers, the language model
+            produces a sentence template and application code fills in the returned values,
+            so database results never go into model prompts. Analyst feedback becomes
+            versioned business definitions, adopted only after a person approves them, so the
+            system gets better at interpreting questions without changing the model. The aim
+            throughout is AI-generated analysis that people can inspect and hold to account.
+          </p>
+
+          <h3>Software development and applied AI</h3>
+          <p>
+            My other work spans human detection in aerial search-and-rescue imagery,
+            multi-agent AI systems and natural-language tools for exploring data. Before
+            graduate school, I co-developed registration and staff appraisal applications at
+            the Ghana-India Kofi Annan Centre of Excellence in ICT, using Python, FastAPI and
+            PostgreSQL.
+          </p>
+          <p>
+            Across all of it, I care about careful implementation, reproducible experiments,
+            and being clear about what a system can and cannot do.
           </p>
 
           <dl class="facts">
             <div class="facts__item">
               <dt>Studying</dt>
-              <dd>MS in AI and Data Science, Carnegie Mellon University</dd>
+              <dd>MSc Engineering Artificial Intelligence, Carnegie Mellon University</dd>
             </div>
             <div class="facts__item">
               <dt>Focus</dt>
-              <dd>Computer vision, multi-agent LLM systems, data pipelines, model robustness and evaluation, responsible AI for low-resource settings</dd>
+              <dd>Healthcare AI, medical imaging, computer vision, model robustness and evaluation, AI agents</dd>
             </div>
           </dl>
         </div>
@@ -189,7 +251,7 @@
             <ol class="timeline">
               <li class="timeline__item">
                 <p class="timeline__date">Graduating Dec 2026</p>
-                <h4 class="timeline__title">MS in Artificial Intelligence and Data Science</h4>
+                <h4 class="timeline__title">MSc Engineering Artificial Intelligence</h4>
                 <p class="timeline__org">Carnegie Mellon University Africa, Kigali</p>
                 <p class="timeline__desc">
                   Coursework includes deep learning, applied computer vision and
